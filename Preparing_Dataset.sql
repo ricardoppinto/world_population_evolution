@@ -1,7 +1,7 @@
 /*Importing and preparing the data*/
 
 
--- Creating the table and importing the main dataset to PostgreSQL
+-- Creating table and importing the main dataset to PostgreSQL
 
 CREATE TABLE demographic_Indicators (
 	ISO3 VARCHAR(3),
@@ -34,7 +34,32 @@ COPY demographic_Indicators(
 	crude_death_rate,
 	life_expectancy,
 	infant_mortality_rate
+)
 
-FROM 'C:\Users\35192\Desktop\Project World Population Evolution\Clean Data\clean_Demographic_Indicators_Data.csv'
+FROM 
+	'C:\Users\35192\Desktop\Project World Population Evolution\Clean Data\clean_Demographic_Indicators_Data.csv'
+DELIMITER ','
+CSV HEADER;
+	
+	
+	
+-- Creating table and importing HDI data
+	
+CREATE TABLE world_HDI (
+	ISO3 VARCHAR(5),
+	country VARCHAR(100),
+	year VARCHAR(4),
+	HDI DECIMAL
+)
+
+COPY world_HDI (
+	ISO3,
+	country,
+	year,
+	HDI
+)
+	
+FROM 
+	'C:\Users\35192\Desktop\Project World Population Evolution\Clean Data\clean_HDI_data.csv'
 DELIMITER ','
 CSV HEADER;
