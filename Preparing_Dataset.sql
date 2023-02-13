@@ -314,9 +314,4 @@ LEFT JOIN men_age_groups
 	ON women_age_groups.iso3 = men_age_groups.iso3
 	AND women_age_groups.year = men_age_groups.year
 	AND women_age_groups.age_range = men_age_groups.age_range
-	
 )
-
-
-
-
