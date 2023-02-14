@@ -3,19 +3,20 @@
 
 -- World population change through time, with percentage
 
-WITH population_change AS(
-  
+WITH population_change AS (
+
 SELECT
   year,
-	total_population,
-	total_population - LAG(total_population) OVER (ORDER BY year) AS change
+  total_population,
+  total_population - LAG(total_population) OVER (ORDER BY year) AS change
 
 FROM 
   demographic_data_final
 WHERE
   location = 'World'
 GROUP BY 
-  year, location, total_population
+  year, location,
+  total_population
 )
 
 SELECT
@@ -29,27 +30,28 @@ FROM
 
 -- Average percentage change per year
 
-WITH population_change AS(
+WITH population_change AS (
 
 SELECT
   year,
-	total_population,
-	total_population - LAG(total_population) OVER (ORDER BY year) AS change
+  total_population,
+  total_population - LAG(total_population) OVER (ORDER BY year) AS change
 FROM 
   demographic_data_final
 WHERE 
   location = 'World'
 GROUP BY 
-  year, total_population
+  year,
+  total_population
 )
 
 SELECT 
   AVG(percentage_change) AS avg_percentage_change
-FROM(
+FROM (
 	SELECT
 	  year,
-    total_population,
-    change/ LAG(total_population) OVER (ORDER BY year) * 100 AS percentage_change
-FROM 
-  population_change
+          total_population,
+          change/ LAG(total_population) OVER (ORDER BY year) * 100 AS percentage_change
+	FROM 
+  	  population_change
 ) sbq
