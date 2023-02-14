@@ -277,7 +277,7 @@ CSV HEADER;
 
 
 
--- Joining the last 2 tables to the main one in order to create a single, organized dataset
+-- Joining the last 2 tables to the main one in order to create a final, organized dataset
 
 SELECT 
 	complete_data_table.iso3,
