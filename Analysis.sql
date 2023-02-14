@@ -58,7 +58,7 @@ FROM (
 
 
 
--- Comparing fertility rate and population growth through time
+-- Fertility rate and population growth rate through time
 
 WITH changes_table AS (
 	
@@ -160,7 +160,23 @@ GROUP BY
 	
 	
 	
+-- Human development index and births through time
+
+SELECT 
+	year,
+	AVG(human_development_idx) AS avg_hdi,
+	AVG(fertility_rate) AS fertility_rate_avg,
+	AVG(crude_birth_rate) AS birth_rate_avg
+FROM 
+	demographic_data_final
+GROUP BY
+	year
+	
+	
+	
 --
+
+
 
 
 
