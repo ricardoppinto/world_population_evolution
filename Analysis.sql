@@ -116,10 +116,51 @@ GROUP BY
 
 
 
+-- World childbearing median age through time
+
+SELECT
+	year,
+	childbearing_median_age
+FROM
+	demographic_data_final
+WHERE
+	location = 'World'
+GROUP BY 
+	year,
+	childbearing_median_age
 
 
 
+-- Average adolescent birth rate, crude birth rate and fertility rate per year
 
+SELECT 
+	year,
+	AVG(adolescent_births) AS adolescent_births_avg, 
+	AVG(fertility_rate) AS fertility_rate_avg,
+	AVG(crude_birth_rate) AS birth_rate_avg
+FROM 
+	demographic_data_final
+GROUP BY
+	year
+
+
+
+-- Gender differences and births through time
+
+SELECT
+	year,
+	AVG(gender_development_idx) AS avg_gdi,
+	AVG(gender_inequality_idx) AS avg_gii,
+	AVG(fertility_rate) AS fertility_rate_avg,
+	AVG(crude_birth_rate) AS birth_rate_avg
+FROM 
+	demographic_data_final
+GROUP BY 
+	year
+	
+	
+	
+--
 
 
 
