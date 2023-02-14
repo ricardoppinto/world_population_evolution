@@ -174,25 +174,104 @@ GROUP BY
 	
 	
 	
---
+-- Average percentage change in human development index per year, men vs women
 
+WITH hdi_averages AS ( 
+	
+SELECT
+	year,
+	AVG(male_hdi) AS avg_male,
+	AVG(female_hdi) AS avg_female
+FROM 
+	demographic_data_final
+WHERE 
+	iso3 IS NOT null
+	AND male_hdi IS NOT null
+GROUP BY 
+	year
+),
 
+	
+hdi_differences AS (
+			
+SELECT 
+	year,
+	hdi_averages.avg_male,
+	hdi_averages.avg_female,
+	(avg_male - LAG(avg_male) OVER (ORDER BY year)) / LAG(avg_male) OVER (ORDER BY year) * 100 AS male_difference,
+	(avg_female - LAG(avg_female) OVER (ORDER BY year)) / LAG(avg_female) OVER (ORDER BY year) * 100 AS female_difference
+FROM 
+	hdi_averages
+)
+	
 
+SELECT 
+	AVG(male_difference) AS avg_male_change,
+	AVG(female_difference) AS avg_female_change
+FROM
+	hdi_differences
+	
+	
+	
+-- World population age distribution in a given year
 
+WITH year_total AS (
 
+SELECT
+	year,
+	location,
+	age_range,
+	total_men,
+	total_female,
+	SUM(total_men + total_female) OVER() AS pop_total
+FROM
+	demographic_data_final
+WHERE
+	location = 'World'
+	AND year = '1950' 
+)
 
+SELECT
+	year,
+	location,
+	age_range,
+	(total_men + total_female)/ (pop_total*1.0)*100 AS percent_of_total
+FROM
+	year_total
+GROUP BY
+	year,
+	location,
+	age_range,
+	total_men,
+	total_female,
+	pop_total
+	
+	
+	
+-- World death rate through time
 
+SELECT
+	year,
+	crude_death_rate
+FROM
+	demographic_data_final
+WHERE
+	location = 'World'
+GROUP BY
+	year,
+	crude_death_rate
+	
+	
+	
+-- World life expectancy through time
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT
+	year,
+	life_expectancy
+FROM
+	demographic_data_final
+WHERE
+	location = 'World'
+GROUP BY
+	year,
+	life_expectancy
