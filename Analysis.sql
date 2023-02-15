@@ -85,7 +85,7 @@ SELECT
 	change/ LAG(total_population) OVER (ORDER BY year) * 100 AS population_change_pct
   
 FROM
-	chganges_table
+	changes_table
 
 
 
