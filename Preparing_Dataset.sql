@@ -135,29 +135,6 @@ CSV HEADER;
 
 
 
--- Creating table and importing data on gender development index
-
-CREATE TABLE world_GDI (
-	ISO3 VARCHAR(3),
-	country VARCHAR(100),
-	year VARCHAR(4),
-	GDI DECIMAL
-	)
-
-COPY world_GDI (
-	ISO3,
-	country,
-	year,
-	GDI
-	)
-	
-FROM 
-	'C:\Users\35192\Desktop\Project World Population Evolution\Clean Data\clean_GDI_data.csv'
-DELIMITER ','
-CSV HEADER;
-
-
-
 -- Creating table and importing data on gender inequality index
 
 CREATE TABLE world_GII (
@@ -198,7 +175,6 @@ SELECT
 	life_expectancy,
 	infant_mortality_rate,
 	adolescent_birth_rate,
-	gender_development_idx,
 	gender_inequality_idx,
 	human_development_idx,
 	male_hdi,
@@ -218,12 +194,9 @@ LEFT JOIN world_female_hdi
 LEFT JOIN world_male_hdi
 	ON world_female_hdi.iso3 = world_male_hdi.iso3
 	AND world_female_hdi.year = world_male_hdi.year
-LEFT JOIN world_gdi
-	ON world_male_hdi.iso3 = world_gdi.iso3
-	AND world_male_hdi.year = world_gdi.year
 LEFT JOIN world_gii
-	ON world_gdi.iso3 = world_gii.iso3
-	AND world_gdi.year = world_gii.year
+	ON world_male_hdi.iso3 = world_gii.iso3
+	AND world_male_hdi.year = world_gii.year
 )
 
 
@@ -295,7 +268,6 @@ SELECT
 	infant_mortality_rate,
 	net_migration_rate,
 	adolescent_birth_rate,
-	gender_development_idx,
 	gender_inequality_idx,
 	human_development_idx,
 	male_hdi,
