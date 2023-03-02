@@ -274,7 +274,7 @@ SELECT
 	female_hdi,
 	men_age_groups.age_range,
 	number_men,
-	number_female
+	number_women
 	
 FROM
 	complete_data_table	
