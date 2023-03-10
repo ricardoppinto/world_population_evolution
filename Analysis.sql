@@ -15,7 +15,8 @@ FROM
 WHERE
 	location = 'World'
 GROUP BY 
-	year, location,
+	year,
+	location,
 	total_population
 )
 
