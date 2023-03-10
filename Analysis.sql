@@ -149,7 +149,6 @@ GROUP BY
 
 SELECT
 	year,
-	AVG(gender_development_idx) AS avg_gdi,
 	AVG(gender_inequality_idx) AS avg_gii,
 	AVG(fertility_rate) AS fertility_rate_avg,
 	AVG(crude_birth_rate) AS birth_rate_avg
