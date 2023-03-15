@@ -146,31 +146,21 @@ GROUP BY
 
 
 
--- Gender differences and births through time
+-- Demographic indicators and births through time
 
 SELECT
 	year,
+	AVG(human_development_idx) AS avg_hdi,
 	AVG(gender_inequality_idx) AS avg_gii,
 	AVG(fertility_rate) AS fertility_rate_avg,
 	AVG(crude_birth_rate) AS birth_rate_avg
 FROM 
 	demographic_data_final
+WHERE
+	iso3 IS NOT null
 GROUP BY 
 	year
-	
-	
-	
--- Human development index and births through time
 
-SELECT 
-	year,
-	AVG(human_development_idx) AS avg_hdi,
-	AVG(fertility_rate) AS fertility_rate_avg,
-	AVG(crude_birth_rate) AS birth_rate_avg
-FROM 
-	demographic_data_final
-GROUP BY
-	year
 	
 	
 	
