@@ -117,18 +117,18 @@ GROUP BY
 
 
 
--- World childbearing median age through time
+-- World childbearing mean age through time
 
 SELECT
 	year,
-	childbearing_median_age
+	childbearing_mean_age
 FROM
 	demographic_data_final
 WHERE
 	location = 'World'
 GROUP BY 
 	year,
-	childbearing_median_age
+	childbearing_mean_age
 
 
 
